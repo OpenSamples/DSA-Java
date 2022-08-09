@@ -2,8 +2,7 @@ public class SLLListOfLists {
   
   public static void main(String[] args) {
     ListOfClubs clubsList = new ListOfClubs();
-    // Empty list
-    System.out.println(clubsList);
+    System.out.println("Starting with an empty list: \n" + clubsList);
     
     clubsList.addClub("ClubX");
     clubsList.addClub("ClubY");
@@ -11,9 +10,16 @@ public class SLLListOfLists {
     clubsList.addClub("ClubX");
     clubsList.addClub("ClubY");
     
-    // TODO: Add members
+    clubsList.addMember("Club0", "Some Name");
     
-    System.out.println(clubsList);
+    clubsList.addMember("ClubX", "Member A");
+    clubsList.addMember("ClubX", "Member B");
+    
+    clubsList.addMember("ClubZ", "Member 1");
+    clubsList.addMember("ClubZ", "Member 2");
+    clubsList.addMember("ClubZ", "Member 3");
+    
+    System.out.println("The list after adding some clubs: \n" + clubsList);
   }
 }
 
@@ -68,7 +74,7 @@ class ListOfClubs {
     }
   }
   
-  public boolean clubExists(String club) {
+  private boolean clubExists(String club) {
     Club curr = clubHead;
     while (curr != null) {
       if (curr.name.equals(club)) {
@@ -77,6 +83,28 @@ class ListOfClubs {
       curr = curr.next;
     }
     return false;
+  }
+  
+  private Club findClub(String club) {
+    Club curr = clubHead;
+    while (curr != null) {
+      if (curr.name.equals(club)) {
+        return curr;
+      }
+      curr = curr.next;
+    }
+    return null;
+  }
+  
+  public void addMember(String clubName, String memberName) {
+    Club club = findClub(clubName);
+    if (club == null) {
+      addClub(clubName);
+      club = findClub(clubName);
+    }
+    Member member = new Member(memberName);
+    member.next = club.memberHead;
+    club.memberHead = member;
   }
   
   public String toString() {
