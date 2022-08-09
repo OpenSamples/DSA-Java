@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SLLAdd {
+public class AddNode {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         NumbersList list = new NumbersList();

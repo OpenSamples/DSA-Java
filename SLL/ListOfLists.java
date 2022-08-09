@@ -1,4 +1,4 @@
-public class SLLListOfLists {
+public class ListOfLists {
 
   public static void main(String[] args) {
   

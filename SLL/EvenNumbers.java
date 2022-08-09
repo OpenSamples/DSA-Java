@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SLLEvenNumbers {
+public class EvenNumbers {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     NumbersList list = new NumbersList();
