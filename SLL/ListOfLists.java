@@ -1,12 +1,24 @@
-public class ListOfLists {
-
-  public static void main(String[] args) {
+public class SLLListOfLists {
   
+  public static void main(String[] args) {
+    ListOfClubs clubsList = new ListOfClubs();
+    // Empty list
+    System.out.println(clubsList);
+    
+    clubsList.addClub("ClubX");
+    clubsList.addClub("ClubY");
+    clubsList.addClub("ClubZ");
+    clubsList.addClub("ClubX");
+    clubsList.addClub("ClubY");
+    
+    // TODO: Add members
+    
+    System.out.println(clubsList);
   }
 }
 
 class ListOfClubs {
-
+  
   private Club clubHead;
   
   class Club {
@@ -47,13 +59,33 @@ class ListOfClubs {
       return fullName;
     }
   }
-  public String toString() {
-      String res = "Clubs:";
-      Club curr = clubHead;
-      while (curr != null) {
-        res += " " + curr;
-        curr = curr.next;
-      }
-      return res += "\n";
+  
+  public void addClub(String clubName) {
+    if (!clubExists(clubName)) {
+      Club club = new Club(clubName);
+      club.next = clubHead;
+      clubHead = club;
     }
+  }
+  
+  public boolean clubExists(String club) {
+    Club curr = clubHead;
+    while (curr != null) {
+      if (curr.name.equals(club)) {
+        return true;
+      }
+      curr = curr.next;
+    }
+    return false;
+  }
+  
+  public String toString() {
+    String res = "Clubs:";
+    Club curr = clubHead;
+    while (curr != null) {
+      res += " " + curr;
+      curr = curr.next;
+    }
+    return res += "\n";
+  }
 }
