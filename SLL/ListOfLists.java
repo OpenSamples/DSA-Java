@@ -14,6 +14,8 @@ public class SLLListOfLists {
     
     clubsList.addMember("ClubX", "Member A");
     clubsList.addMember("ClubX", "Member B");
+    clubsList.addMember("ClubX", "Member B");
+    clubsList.addMember("ClubX", "Member B");
     
     clubsList.addMember("ClubZ", "Member 1");
     clubsList.addMember("ClubZ", "Member 2");
@@ -74,10 +76,10 @@ class ListOfClubs {
     }
   }
   
-  private boolean clubExists(String club) {
+  private boolean clubExists(String clubName) {
     Club curr = clubHead;
     while (curr != null) {
-      if (curr.name.equals(club)) {
+      if (curr.name.equals(clubName)) {
         return true;
       }
       curr = curr.next;
@@ -102,9 +104,23 @@ class ListOfClubs {
       addClub(clubName);
       club = findClub(clubName);
     }
-    Member member = new Member(memberName);
-    member.next = club.memberHead;
-    club.memberHead = member;
+    if (!memberExists(clubName, memberName)) {
+      Member member = new Member(memberName);
+      member.next = club.memberHead;
+      club.memberHead = member;
+    }
+  }
+  
+  public boolean memberExists(String clubName, String memberName) {
+    Club club = findClub(clubName);
+    Member curr = club.memberHead;
+    while (curr != null) {
+      if (curr.fullName.equals(memberName)) {
+        return true;
+      }
+      curr = curr.next;
+    }
+    return false;
   }
   
   public String toString() {
