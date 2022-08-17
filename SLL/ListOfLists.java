@@ -3,30 +3,30 @@ public class SLLListOfLists {
   public static void main(String[] args) {
     ListOfClubs clubsList = new ListOfClubs();
     System.out.println("Starting with an empty list: \n" + clubsList);
-    
-    clubsList.addClub("ClubX");
-    clubsList.addClub("ClubY");
-    clubsList.addClub("ClubZ");
-    clubsList.addClub("ClubX");
-    clubsList.addClub("ClubY");
-    
+
     clubsList.addMember("Club0", "Some Name");
     
+    clubsList.addClub("ClubX");
     clubsList.addMember("ClubX", "Member A");
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
+    clubsList.addMember("ClubX", "Remove Me");
+    
+    clubsList.addMember("ClubY", "M.N.");
     
     clubsList.addMember("ClubZ", "Member 1");
     clubsList.addMember("ClubZ", "Member 2");
     clubsList.addMember("ClubZ", "Member 3");
-    
+    clubsList.addMember("ClubZ", "Remove Me");
     System.out.println("The list after adding some clubs: \n" + clubsList);
     
     clubsList.removeMember("ClubZ", "Member 1");
+    System.out.println("The list after removing Member 1 from ClubZ: \n" + clubsList);
     
-    System.out.println("The list after removing member: \n" + clubsList);
-  }
+    clubsList.removeMember("Remove Me");
+    clubsList.removeMember("Remove Me");
+    System.out.println("The list after removing Remove Me member from any club: \n" + clubsList);  }
 }
 
 class ListOfClubs {
@@ -150,6 +150,14 @@ class ListOfClubs {
       }
     }
     return found;
+  }
+
+  public boolean removeMember(String memberName) {
+    Club curr = clubHead;
+    while (curr != null && !removeMember(curr, memberName)) {
+      curr = curr.next;
+    } 
+    return curr != null;
   }
   
   public String toString() {
