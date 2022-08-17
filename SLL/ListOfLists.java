@@ -22,6 +22,10 @@ public class SLLListOfLists {
     clubsList.addMember("ClubZ", "Member 3");
     
     System.out.println("The list after adding some clubs: \n" + clubsList);
+    
+    clubsList.removeMember("ClubZ", "Member 1");
+    
+    System.out.println("The list after removing member: \n" + clubsList);
   }
 }
 
@@ -121,6 +125,31 @@ class ListOfClubs {
       curr = curr.next;
     }
     return false;
+  }
+  
+  public boolean removeMember(String clubName, String memberName) {
+    Club club = findClub(clubName);
+    return removeMember(club, memberName);
+  }
+  
+  private boolean removeMember(Club club, String memberName) {
+    boolean found = false;
+    if (club != null) {
+      if (club.memberHead != null && club.memberHead.fullName.equals(memberName)) {
+        club.memberHead = club.memberHead.next;
+        found = true;
+      } else {
+        Member prev = club.memberHead;
+        while (prev.next != null && !prev.next.fullName.equals(memberName)) {
+          prev = prev.next;
+        }
+        if (prev.next != null) {
+          prev.next = prev.next.next;
+          found = true;
+        }
+      }
+    }
+    return found;
   }
   
   public String toString() {
