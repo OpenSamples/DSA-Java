@@ -3,17 +3,19 @@ public class SLLListOfLists {
   public static void main(String[] args) {
     ListOfClubs clubsList = new ListOfClubs();
     System.out.println("Starting with an empty list: \n" + clubsList);
-
-    clubsList.addMember("Club0", "Some Name");
     
+    clubsList.addMember("ClubX", "Remove Me");
     clubsList.addClub("ClubX");
+    clubsList.addMember("Club0", "Some Name");
+    clubsList.addClub("ClubY");
+    
     clubsList.addMember("ClubX", "Member A");
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
-    clubsList.addMember("ClubX", "Remove Me");
     
-    clubsList.addMember("ClubY", "M.N.");
+    
+    clubsList.addMember("ClubY", "Remove Me");
     
     clubsList.addMember("ClubZ", "Member 1");
     clubsList.addMember("ClubZ", "Member 2");
@@ -26,8 +28,9 @@ public class SLLListOfLists {
     
     clubsList.removeMember("Remove Me");
     clubsList.removeMember("Remove Me");
-    System.out.println("The list after removing Remove Me member from any club: \n" + clubsList);  }
-}
+    clubsList.removeMember("Remove Me");
+    System.out.println("The list after removing Remove Me member from any club: \n" + clubsList);
+  }
 
 class ListOfClubs {
   
@@ -149,6 +152,11 @@ class ListOfClubs {
         }
       }
     }
+    if (found) {
+      if (club.memberHead == null) {
+        removeClub(club.name);
+      }
+    }
     return found;
   }
 
@@ -158,6 +166,25 @@ class ListOfClubs {
       curr = curr.next;
     } 
     return curr != null;
+  }
+
+  public boolean removeClub(String clubName) {
+    if (clubHead == null) {
+      return false;
+    }
+    if (clubHead.name.equals(clubName)) {
+      clubHead = clubHead.next;
+      return true;
+    }
+    Club prev = clubHead;
+    while (prev.next != null) {
+      if (prev.next.name.equals(clubName)) {
+        prev.next = prev.next.next;
+        return true;
+      }
+      prev = prev.next;
+    }
+    return false;
   }
   
   public String toString() {
