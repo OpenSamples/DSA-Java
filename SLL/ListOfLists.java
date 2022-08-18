@@ -1,4 +1,4 @@
-public class SLLListOfLists {
+public class ListOfLists {
   
   public static void main(String[] args) {
     ListOfClubs clubsList = new ListOfClubs();
@@ -13,7 +13,7 @@ public class SLLListOfLists {
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
     clubsList.addMember("ClubX", "Member B");
-    
+    clubsList.addMember("ClubX", "Member W");
     
     clubsList.addMember("ClubY", "Remove Me");
     
@@ -21,6 +21,7 @@ public class SLLListOfLists {
     clubsList.addMember("ClubZ", "Member 2");
     clubsList.addMember("ClubZ", "Member 3");
     clubsList.addMember("ClubZ", "Remove Me");
+    clubsList.addMember("ClubZ", "Member W");
     System.out.println("The list after adding some clubs: \n" + clubsList);
     
     clubsList.removeMember("ClubZ", "Member 1");
@@ -30,7 +31,11 @@ public class SLLListOfLists {
     clubsList.removeMember("Remove Me");
     clubsList.removeMember("Remove Me");
     System.out.println("The list after removing Remove Me member from any club: \n" + clubsList);
+    
+    clubsList.removeAllClubsContainMember("Member W");
+    System.out.println("The list after removing clubs that contain Member W: \n" + clubsList);
   }
+}
 
 class ListOfClubs {
   
@@ -159,7 +164,7 @@ class ListOfClubs {
     }
     return found;
   }
-
+  
   public boolean removeMember(String memberName) {
     Club curr = clubHead;
     while (curr != null && !removeMember(curr, memberName)) {
@@ -167,7 +172,7 @@ class ListOfClubs {
     } 
     return curr != null;
   }
-
+  
   public boolean removeClub(String clubName) {
     if (clubHead == null) {
       return false;
@@ -185,6 +190,20 @@ class ListOfClubs {
       prev = prev.next;
     }
     return false;
+  }
+  
+  public void removeAllClubsContainMember(String memberName) {
+    Club curr = clubHead;
+    while (curr != null) {
+      Member currMem = curr.memberHead;
+      while (currMem != null) {
+        if (currMem.fullName.equals(memberName)) {
+          removeClub(curr.name);
+        }
+        currMem = currMem.next;
+      }
+      curr = curr.next;
+    }
   }
   
   public String toString() {
