@@ -65,6 +65,8 @@ class NumbersList {
       } else {
         oddTail.next = current;
       }
+      oddTail = current;
+
       if (current != null) {
         current = current.next;
       }
