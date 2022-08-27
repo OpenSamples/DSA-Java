@@ -42,8 +42,6 @@ class NumbersList {
     Node current = head;
     Node evenTail = null;
     Node oddTail = null;
-    Node next;
-    
     head = null;
     
     while (current != null) {
@@ -54,10 +52,8 @@ class NumbersList {
           evenTail.next = current;
         }
         evenTail = current;
-        
-        next = current.next;
-        current.next = null;
-        current = next;
+        current = current.next;
+        evenTail.next = null;
         continue;
       }
       if (oddTail == null) {
@@ -66,10 +62,7 @@ class NumbersList {
         oddTail.next = current;
       }
       oddTail = current;
-
       current = current.next;
-    }
-    if (oddTail != null) {
       oddTail.next = null;
     }
     return evenList;
