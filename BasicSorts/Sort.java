@@ -9,7 +9,7 @@ public class Sort {
     Item[] arr = readItems("file.txt");
 
     //sort
-    int option = 2;
+    int option = 3;
     // TODO: Choose option in the console
     
     switch (option) {
@@ -18,6 +18,12 @@ public class Sort {
         break;
       case 2:
         exchangeSort(arr, new CompareByName());
+        break;
+      case 3:
+        selectionSort(arr, new CompareByName());
+        break;
+      default:
+        System.out.println("Option doesn't exist, try again!");
     }
     
     //print
@@ -44,7 +50,7 @@ public class Sort {
     }
   }
   
-  // Exchange or Bubble sort - the most inefficient way to sort elements.
+  // Exchange or Bubble sort - the most inefficient way to sort items.
   public static <T extends Comparable<T>> void exchangeSort(T[] arr, Comparator<T> cmp) {
     for (int i = 0; i < arr.length - 1; i++) {
       for (int j = arr.length - 1; j > i; j--) {
@@ -57,12 +63,12 @@ public class Sort {
     }
   }
   
-  // Selection sort - when it's easier to compare elements than to move them
-  public static <T extends Comparable<T>> void selectionSort(T[] arr) {
+  // Selection sort - when it's easier to compare items than to move them.
+  public static <T extends Comparable<T>> void selectionSort(T[] arr, Comparator<T> cmp) {
     for (int i = 0; i < arr.length - 1; i++) {
       int minIndex = i;
       for (int j = i + 1; j < arr.length; j++) {
-        if (arr[j].compareTo(arr[minIndex]) < 0) {
+        if (cmp.compare(arr[j], arr[minIndex]) < 0) {
           minIndex = j;  
         }
       }
