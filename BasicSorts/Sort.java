@@ -1,20 +1,54 @@
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Sort {
   
   public static void main(String[] args) {
   
     //read
+    Item[] arr = readItems("file.txt");
 
     //sort
+    int option = 2;
+    // TODO: Choose option in the console
+    
+    switch (option) {
+      case 1:
+        Arrays.sort(arr);
+        break;
+      case 2:
+        exchangeSort(arr, new CompareByName());
+    }
     
     //print
+    printItems(arr);
+  }
+  
+  public static Item[] readItems(String file) {
+    // TODO: read items for a text file
+    int n = 2;
+    Item[] arr = new Item[n];
+    
+    for (int i = 0; i < n; i++) {
+      String name = "test";
+      int number = 0;
+      Item item = new Item(name, number);
+      arr[i] = item;
+    }
+    return arr;
+  }
+  
+  public static void printItems(Item[] arr) {
+    for (Item item : arr) {
+      System.out.println(item);  
+    }
   }
   
   // Exchange or Bubble sort - the most inefficient way to sort elements.
-  public static <T extends Comparable<T>> void exchangeSort(T[] arr) {
+  public static <T extends Comparable<T>> void exchangeSort(T[] arr, Comparator<T> cmp) {
     for (int i = 0; i < arr.length - 1; i++) {
       for (int j = arr.length - 1; j > i; j--) {
-        if (arr[j].compareTo(arr[j - 1]) < 0) {
+        if (cmp.compare(arr[j], arr[j - 1]) < 0) {
           T tmp = arr[j];
           arr[j] = arr[j - 1];
           arr[j - 1] = tmp;
@@ -65,5 +99,11 @@ class Item implements Comparable<Item> {
   
   public String toString() {
     return name + "\n" + number;  
+  }
+}
+
+class CompareByName implements Comparator<Item> {
+  public int compare(Item i1, Item i2) {
+    return i1.compareTo(i2);  
   }
 }
